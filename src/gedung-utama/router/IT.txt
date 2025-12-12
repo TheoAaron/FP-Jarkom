@@ -1,0 +1,71 @@
+!============================================
+! ROUTER IT - Sub-router Gedung Utama
+! Departemen: IT Pendidikan (6 host - servers)
+! Network: 192.168.5.32/28
+!============================================
+
+enable
+configure terminal
+
+hostname Router-IT
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama
+ ip address 192.168.6.18 255.255.255.252
+ no shutdown
+
+! Interface ke Switch IT (Servers)
+interface FastEthernet1/0
+ description Connection to Switch-IT
+ ip address 192.168.5.33 255.255.255.240
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.50
+ network 192.168.6.16 0.0.0.3 area 1
+ network 192.168.5.32 0.0.0.15 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! Static IP untuk Server (No DHCP)
+! Servers akan menggunakan IP statis
+!============================================
+
+! Note: IP statis untuk servers:
+! 192.168.5.34 - Server 1
+! 192.168.5.35 - Server 2
+! 192.168.5.36 - Server 3
+! dst...
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER IT - IT Pendidikan (Servers)
+========================================
+#
+
+end
+write memory

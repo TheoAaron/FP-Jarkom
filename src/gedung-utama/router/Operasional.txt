@@ -1,0 +1,70 @@
+!============================================
+! ROUTER OPERASIONAL - Sub-router Gedung Utama
+! Departemen: Layanan Operasional Yayasan (380 host)
+! Network: 192.168.0.0/23
+!============================================
+
+enable
+configure terminal
+
+hostname Router-Operasional
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama
+ ip address 192.168.6.22 255.255.255.252
+ no shutdown
+
+! Interface ke Switch Operasional (Client)
+interface FastEthernet1/0
+ description Connection to Switch-Operasional
+ ip address 192.168.0.1 255.255.254.0
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.60
+ network 192.168.6.20 0.0.0.3 area 1
+ network 192.168.0.0 0.0.1.255 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! DHCP Pool untuk Operasional
+!============================================
+
+ip dhcp excluded-address 192.168.0.1 192.168.0.10
+ip dhcp pool Operasional-Pool
+ network 192.168.0.0 255.255.254.0
+ default-router 192.168.0.1
+ dns-server 8.8.8.8 8.8.4.4
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER OPERASIONAL - Layanan Operasional Yayasan
+========================================
+#
+
+end
+write memory

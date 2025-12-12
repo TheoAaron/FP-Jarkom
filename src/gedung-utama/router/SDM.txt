@@ -1,0 +1,70 @@
+!============================================
+! ROUTER SDM - Sub-router Gedung Utama
+! Departemen: SDM Pendidikan (95 host)
+! Network: 192.168.4.0/25
+!============================================
+
+enable
+configure terminal
+
+hostname Router-SDM
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama
+ ip address 192.168.6.2 255.255.255.252
+ no shutdown
+
+! Interface ke Switch SDM (Client)
+interface FastEthernet1/0
+ description Connection to Switch-SDM
+ ip address 192.168.4.1 255.255.255.128
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.10
+ network 192.168.6.0 0.0.0.3 area 1
+ network 192.168.4.0 0.0.0.127 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! DHCP Pool untuk SDM Pendidikan
+!============================================
+
+ip dhcp excluded-address 192.168.4.1 192.168.4.10
+ip dhcp pool SDM-Pool
+ network 192.168.4.0 255.255.255.128
+ default-router 192.168.4.1
+ dns-server 8.8.8.8 8.8.4.4
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER SDM - SDM Pendidikan
+========================================
+#
+
+end
+write memory

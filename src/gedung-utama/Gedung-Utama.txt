@@ -1,0 +1,96 @@
+!============================================
+! ROUTER GEDUNG UTAMA - Main Building Router
+! Fungsi: Router utama Gedung Utama (VLSM)
+!============================================
+
+enable
+configure terminal
+
+hostname Router-Gedung-Utama
+
+! Interface ke Router Kantor
+interface FastEthernet0/0
+ description Connection to Router-Kantor
+ ip address 192.168.254.2 255.255.255.252
+ no shutdown
+
+! Interface ke Router SDM (Sub-router)
+interface FastEthernet1/0
+ description Connection to Router-SDM
+ ip address 192.168.6.1 255.255.255.252
+ no shutdown
+
+! Interface ke Router Kurikulum (Sub-router)
+interface FastEthernet2/0
+ description Connection to Router-Kurikulum
+ ip address 192.168.6.5 255.255.255.252
+ no shutdown
+
+! Interface ke Router Sarana (Sub-router)
+interface FastEthernet1/0
+ description Connection to Router-Sarana
+ ip address 192.168.6.9 255.255.255.252
+ no shutdown
+
+! Interface ke Router Pembinaan (Sub-router)
+interface FastEthernet1/1
+ description Connection to Router-Pembinaan
+ ip address 192.168.6.13 255.255.255.252
+ no shutdown
+
+! Interface ke Router IT (Sub-router)
+interface FastEthernet2/0
+ description Connection to Router-IT
+ ip address 192.168.6.17 255.255.255.252
+ no shutdown
+
+! Interface ke Router Operasional (Sub-router)
+interface FastEthernet2/1
+ description Connection to Router-Operasional
+ ip address 192.168.6.21 255.255.255.252
+ no shutdown
+
+!============================================
+! OSPF Configuration - Area 1
+!============================================
+
+router ospf 1
+ router-id 2.2.2.2
+ network 192.168.254.0 0.0.0.3 area 0
+ network 192.168.6.0 0.0.0.31 area 1
+ network 192.168.0.0 0.0.5.255 area 1
+ area 1 stub
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+! Console
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+! VTY
+line vty 0 4
+ password cisco
+ login
+ transport input ssh telnet
+
+! Enable password
+enable secret class
+
+! Banner
+banner motd #
+========================================
+ ROUTER GEDUNG UTAMA - Main Building
+ Unauthorized access is prohibited!
+========================================
+#
+
+end
+write memory

@@ -1,0 +1,98 @@
+!============================================
+! ROUTER GEDUNG ARA - ARA Tech Building Core Router
+! Fungsi: Router utama Gedung ARA (CIDR + EIGRP)
+!============================================
+
+enable
+configure terminal
+
+hostname Router-Gedung-ARA
+
+! Interface ke Router Kantor
+interface FastEthernet0/0
+ description Connection to Router-Kantor
+ ip address 192.168.254.6 255.255.255.252
+ no shutdown
+
+! Interface ke Router Lantai 1
+interface FastEthernet1/0
+ description Connection to Router-Lantai1
+ ip address 192.168.20.1 255.255.255.252
+ no shutdown
+
+! Interface ke Router Lantai 2
+interface FastEthernet2/0
+ description Connection to Router-Lantai2
+ ip address 192.168.20.5 255.255.255.252
+ no shutdown
+
+! Interface ke Router Lantai 3
+interface FastEthernet1/0
+ description Connection to Router-Lantai3
+ ip address 192.168.20.9 255.255.255.252
+ no shutdown
+
+! Interface ke Router Lantai 4
+interface FastEthernet1/1
+ description Connection to Router-Lantai4
+ ip address 192.168.20.13 255.255.255.252
+ no shutdown
+
+! Interface ke Router Lantai 5
+interface FastEthernet2/0
+ description Connection to Router-Lantai5
+ ip address 192.168.20.17 255.255.255.252
+ no shutdown
+
+!============================================
+! OSPF Configuration - Area 2 (Backbone to Core)
+!============================================
+
+router ospf 1
+ router-id 3.3.3.3
+ network 192.168.254.4 0.0.0.3 area 0
+ redistribute eigrp 100 subnets
+
+!============================================
+! EIGRP Configuration - Internal Building
+!============================================
+
+router eigrp 100
+ network 192.168.16.0 0.0.7.255
+ network 192.168.20.0 0.0.0.31
+ redistribute ospf 1 metric 10000 100 255 1 1500
+ no auto-summary
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+! Console
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+! VTY
+line vty 0 4
+ password cisco
+ login
+ transport input ssh telnet
+
+! Enable password
+enable secret class
+
+! Banner
+banner motd #
+========================================
+ ROUTER GEDUNG ARA - ARA Tech Building
+ Unauthorized access is prohibited!
+========================================
+#
+
+end
+write memory

@@ -1,0 +1,49 @@
+Penggabungan,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,I,,,,,,,,,,,,,,,,,
+,Subnet,Gabungan dari,,,,,,Netmask Akhir,,,,,,,,,,
+,,1,,2,,3,,,,,,,,,,,,
+,,Subnet,Netmask,Subnet,Netmask,Subnet,Netmask,,,,,,,,,,,
+,B1,A18,/26,A19,/28,A20,/27,/25,79,,,,,,,,,
+,B2,A21,/26,A22,/27,A23,/27,/25,85,,,,,,,,,
+,B3,A24,/26,A25,/27,,,/25,73,,,,,,,,,
+,B4,A26,/23,A27,/23,A28,/23,/25,86,,,,,,,,,
+,B5,A29,/28,A30,/28,A31,/28,/26,37,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,II,,,,,,,,,,,,,,,,,
+,Subnet,Gabungan dari,,,,Netmask Akhir,,,,,,,,,,,,
+,,1,,2,,,,,,,,,,,,,,
+,,Subnet,Netmask,Subnet,Netmask,,,,,,,,,,,,,
+,C1,A13,/30,B1,/25,/25,81,,,,,,,,,,,
+,C2,A14,/30,B2,/25,/25,87,,,,,,,,,,,
+,C3,A15,/30,B3,/25,/25,75,,,,,,,,,,,
+,C4,A16,/30,B4,/25,/25,88,,,,,,,,,,,
+,C5,A17,/30,B5,/26,/26,39,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,III,,,,,,,,,,,,,,,,,
+,Subnet,Gabungan dari,,,,,,,,,,Netmask Akhir,,,,,,
+,,1,,2,,3,,4,,5,,,,,,,,
+,,Subnet,Netmask,Subnet,Netmask,Subnet,Netmask,Subnet,Netmask,Subnet,Netmask,,,,,,,
+,D1,C1,/25,C2,/25,C3,/25,C4,/25,C5,/26,/23,370,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,Nama Subnet,Rute,Jumlah IP,Netmask
+,,,,,,,,,,,,,,,A13,Gedung ARA > Switch6 > Lantai 1,2,/30
+,,,,,,,,,,,,,,,A14,Gedung ARA > Switch6 > Lantai 2,2,/30
+,,,,,,,,,,,,,,,A15,Gedung ARA > Switch6 > Lantai 3,2,/30
+,,,,,,,,,,,,,,,A16,Gedung ARA > Switch6 > Lantai 4,2,/30
+,,,,,,,,,,,,,,,A17,Gedung ARA > Switch6 > Lantai 5,2,/30
+,,,,,,,,,,,,,,,A18,Gedung ARA > Switch6 > Lantai 1 > IT Support,45,/26
+,,,,,,,,,,,,,,,A19,Gedung ARA > Switch6 > Lantai 1 > Ruang Server ,12,/28
+,,,,,,,,,,,,,,,A20,Gedung ARA > Switch6 > Lantai 1 >  Cybersecurity,22,/27
+,,,,,,,,,,,,,,,A21,Gedung ARA > Switch6 > Lantai 2 > Marketing,35,/26
+,,,,,,,,,,,,,,,A22,Gedung ARA > Switch6 > Lantai 2 > Sales,25,/27
+,,,,,,,,,,,,,,,A23,Gedung ARA > Switch6 > Lantai 2 > HR,25,/27
+,,,,,,,,,,,,,,,A24,Gedung ARA > Switch6 > Lantai 3 > RnD,55,/26
+,,,,,,,,,,,,,,,A25,Gedung ARA > Switch6 > Lantai 3 > People-Dev,18,/27
+,,,,,,,,,,,,,,,A26,Gedung ARA > Switch6 > Lantai 4 > Keuangan ,28,/27
+,,,,,,,,,,,,,,,A27,Gedung ARA > Switch6 > Lantai 4 > Legal,18,/27
+,,,,,,,,,,,,,,,A28,Gedung ARA > Switch6 > Lantai 4 > CS,40,/26
+,,,,,,,,,,,,,,,A29,Gedung ARA > Switch6 > Lantai 5 > Executive,12,/28
+,,,,,,,,,,,,,,,A30,Gedung ARA > Switch6 > Lantai 5 > Guest Lounge,10,/28
+,,,,,,,,,,,,,,,A31,Gedung ARA > Switch6 > Lantai 5 > Auditorium,5,/29

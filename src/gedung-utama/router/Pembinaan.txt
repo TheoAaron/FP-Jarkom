@@ -1,0 +1,70 @@
+!============================================
+! ROUTER PEMBINAAN - Sub-router Gedung Utama
+! Departemen: Pembinaan & Pengawasan Sekolah (18 host)
+! Network: 192.168.4.192/27
+!============================================
+
+enable
+configure terminal
+
+hostname Router-Pembinaan
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama
+ ip address 192.168.6.14 255.255.255.252
+ no shutdown
+
+! Interface ke Switch Pembinaan (Client)
+interface FastEthernet1/0
+ description Connection to Switch-Pembinaan
+ ip address 192.168.4.193 255.255.255.224
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.40
+ network 192.168.6.12 0.0.0.3 area 1
+ network 192.168.4.192 0.0.0.31 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! DHCP Pool untuk Pembinaan
+!============================================
+
+ip dhcp excluded-address 192.168.4.193 192.168.4.198
+ip dhcp pool Pembinaan-Pool
+ network 192.168.4.192 255.255.255.224
+ default-router 192.168.4.193
+ dns-server 8.8.8.8 8.8.4.4
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER PEMBINAAN - Pembinaan & Pengawasan
+========================================
+#
+
+end
+write memory

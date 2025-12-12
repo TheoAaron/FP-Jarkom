@@ -1,0 +1,64 @@
+!============================================
+! ROUTER RKURIKULUM - Backup Router Kurikulum
+! Departemen: Kurikulum & Penjaminan Mutu (Backup)
+! Network: 192.168.2.0/23
+!============================================
+
+enable
+configure terminal
+
+hostname Router-RKurikulum
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama (Backup)
+ ip address 192.168.6.7 255.255.255.252
+ standby 1 ip 192.168.6.6
+ standby 1 priority 90
+ no shutdown
+
+! Interface ke Switch Kurikulum (Client)
+interface FastEthernet1/0
+ description Connection to Switch-Kurikulum (Backup)
+ ip address 192.168.2.2 255.255.254.0
+ standby 2 ip 192.168.2.1
+ standby 2 priority 90
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.21
+ network 192.168.6.4 0.0.0.3 area 1
+ network 192.168.2.0 0.0.1.255 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER RKURIKULUM - Backup Kurikulum
+========================================
+#
+
+end
+write memory

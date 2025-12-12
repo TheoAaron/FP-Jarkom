@@ -1,0 +1,64 @@
+!============================================
+! ROUTER RIT - Backup Router IT
+! Departemen: IT Pendidikan (Backup)
+! Network: 192.168.5.32/28
+!============================================
+
+enable
+configure terminal
+
+hostname Router-RIT
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama (Backup)
+ ip address 192.168.6.19 255.255.255.252
+ standby 1 ip 192.168.6.18
+ standby 1 priority 90
+ no shutdown
+
+! Interface ke Switch IT (Servers)
+interface FastEthernet1/0
+ description Connection to Switch-IT (Backup)
+ ip address 192.168.5.34 255.255.255.240
+ standby 2 ip 192.168.5.33
+ standby 2 priority 90
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.51
+ network 192.168.6.16 0.0.0.3 area 1
+ network 192.168.5.32 0.0.0.15 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER RIT - Backup IT Pendidikan
+========================================
+#
+
+end
+write memory

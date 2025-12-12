@@ -1,0 +1,64 @@
+!============================================
+! ROUTER RPEMBINAAN - Backup Router Pembinaan
+! Departemen: Pembinaan & Pengawasan (Backup)
+! Network: 192.168.4.192/27
+!============================================
+
+enable
+configure terminal
+
+hostname Router-RPembinaan
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama (Backup)
+ ip address 192.168.6.15 255.255.255.252
+ standby 1 ip 192.168.6.14
+ standby 1 priority 90
+ no shutdown
+
+! Interface ke Switch Pembinaan (Client)
+interface FastEthernet1/0
+ description Connection to Switch-Pembinaan (Backup)
+ ip address 192.168.4.194 255.255.255.224
+ standby 2 ip 192.168.4.193
+ standby 2 priority 90
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.41
+ network 192.168.6.12 0.0.0.3 area 1
+ network 192.168.4.192 0.0.0.31 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER RPEMBINAAN - Backup Pembinaan
+========================================
+#
+
+end
+write memory

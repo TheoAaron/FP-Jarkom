@@ -1,0 +1,70 @@
+!============================================
+! ROUTER KURIKULUM - Sub-router Gedung Utama
+! Departemen: Kurikulum & Penjaminan Mutu (220 host)
+! Network: 192.168.2.0/23
+!============================================
+
+enable
+configure terminal
+
+hostname Router-Kurikulum
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama
+ ip address 192.168.6.6 255.255.255.252
+ no shutdown
+
+! Interface ke Switch Kurikulum (Client)
+interface FastEthernet1/0
+ description Connection to Switch-Kurikulum
+ ip address 192.168.2.1 255.255.254.0
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.20
+ network 192.168.6.4 0.0.0.3 area 1
+ network 192.168.2.0 0.0.1.255 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! DHCP Pool untuk Kurikulum
+!============================================
+
+ip dhcp excluded-address 192.168.2.1 192.168.2.10
+ip dhcp pool Kurikulum-Pool
+ network 192.168.2.0 255.255.254.0
+ default-router 192.168.2.1
+ dns-server 8.8.8.8 8.8.4.4
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER KURIKULUM - Kurikulum & Penjaminan Mutu
+========================================
+#
+
+end
+write memory

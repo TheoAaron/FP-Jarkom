@@ -1,0 +1,109 @@
+!============================================
+! ROUTER LANTAI 2 - Gedung ARA Tech
+! Departemen: Marketing, Sales, Human Resources
+! Network Aggregation: 192.168.17.0/25
+!============================================
+
+enable
+configure terminal
+
+hostname Router-Lantai2
+
+! Interface ke Router Gedung ARA
+interface FastEthernet0/0
+ description Connection to Router-Gedung-ARA
+ ip address 192.168.20.6 255.255.255.252
+ no shutdown
+
+! Interface ke Switch Marketing (VLAN 10)
+interface FastEthernet1/0.10
+ description Marketing Department
+ encapsulation dot1Q 10
+ ip address 192.168.17.1 255.255.255.192
+ no shutdown
+
+! Interface ke Switch Sales (VLAN 20)
+interface FastEthernet1/0.20
+ description Sales Department
+ encapsulation dot1Q 20
+ ip address 192.168.17.129 255.255.255.224
+ no shutdown
+
+! Interface ke Switch Human Resources (VLAN 30)
+interface FastEthernet1/0.30
+ description Human Resources Department
+ encapsulation dot1Q 30
+ ip address 192.168.17.161 255.255.255.224
+ no shutdown
+
+! Enable parent interface
+interface FastEthernet1/0
+ description Trunk to Switches Lantai 2
+ no shutdown
+
+!============================================
+! EIGRP Configuration
+!============================================
+
+router eigrp 100
+ network 192.168.20.4 0.0.0.3
+ network 192.168.17.0 0.0.0.63
+ network 192.168.17.128 0.0.0.31
+ network 192.168.17.160 0.0.0.31
+ passive-interface FastEthernet1/0.10
+ passive-interface FastEthernet1/0.20
+ passive-interface FastEthernet1/0.30
+ no auto-summary
+
+!============================================
+! DHCP Pools
+!============================================
+
+! Marketing DHCP
+ip dhcp excluded-address 192.168.17.1 192.168.17.10
+ip dhcp pool Marketing-Pool
+ network 192.168.17.0 255.255.255.192
+ default-router 192.168.17.1
+ dns-server 8.8.8.8 8.8.4.4
+
+! Sales DHCP
+ip dhcp excluded-address 192.168.17.129 192.168.17.135
+ip dhcp pool Sales-Pool
+ network 192.168.17.128 255.255.255.224
+ default-router 192.168.17.129
+ dns-server 8.8.8.8 8.8.4.4
+
+! HR DHCP
+ip dhcp excluded-address 192.168.17.161 192.168.17.167
+ip dhcp pool HR-Pool
+ network 192.168.17.160 255.255.255.224
+ default-router 192.168.17.161
+ dns-server 8.8.8.8 8.8.4.4
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER LANTAI 2 - ARA Tech
+========================================
+#
+
+end
+write memory

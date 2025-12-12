@@ -1,0 +1,109 @@
+!============================================
+! ROUTER LANTAI 5 - Gedung ARA Tech
+! Departemen: Executive Office, Guest Lounge, Auditorium
+! Network: Executive (192.168.5.0/28), Guest (192.168.5.16/28), Auditorium (192.168.4.224/27)
+!============================================
+
+enable
+configure terminal
+
+hostname Router-Lantai5
+
+! Interface ke Router Gedung ARA
+interface FastEthernet0/0
+ description Connection to Router-Gedung-ARA
+ ip address 192.168.20.18 255.255.255.252
+ no shutdown
+
+! Interface ke Switch Executive Office (VLAN 10)
+interface FastEthernet1/0.10
+ description Executive Office
+ encapsulation dot1Q 10
+ ip address 192.168.5.1 255.255.255.240
+ no shutdown
+
+! Interface ke Switch Guest Lounge (VLAN 20)
+interface FastEthernet1/0.20
+ description Guest Lounge
+ encapsulation dot1Q 20
+ ip address 192.168.5.17 255.255.255.240
+ no shutdown
+
+! Interface ke Switch Auditorium (VLAN 30)
+interface FastEthernet1/0.30
+ description Auditorium
+ encapsulation dot1Q 30
+ ip address 192.168.4.225 255.255.255.224
+ no shutdown
+
+! Enable parent interface
+interface FastEthernet1/0
+ description Trunk to Switches Lantai 5
+ no shutdown
+
+!============================================
+! EIGRP Configuration
+!============================================
+
+router eigrp 100
+ network 192.168.20.16 0.0.0.3
+ network 192.168.5.0 0.0.0.15
+ network 192.168.5.16 0.0.0.15
+ network 192.168.4.224 0.0.0.31
+ passive-interface FastEthernet1/0.10
+ passive-interface FastEthernet1/0.20
+ passive-interface FastEthernet1/0.30
+ no auto-summary
+
+!============================================
+! DHCP Pools
+!============================================
+
+! Executive Office DHCP
+ip dhcp excluded-address 192.168.5.1 192.168.5.5
+ip dhcp pool Executive-Pool
+ network 192.168.5.0 255.255.255.240
+ default-router 192.168.5.1
+ dns-server 8.8.8.8 8.8.4.4
+
+! Guest Lounge DHCP
+ip dhcp excluded-address 192.168.5.17 192.168.5.20
+ip dhcp pool Guest-Pool
+ network 192.168.5.16 255.255.255.240
+ default-router 192.168.5.17
+ dns-server 8.8.8.8 8.8.4.4
+
+! Auditorium DHCP
+ip dhcp excluded-address 192.168.4.225 192.168.4.230
+ip dhcp pool Auditorium-Pool
+ network 192.168.4.224 255.255.255.224
+ default-router 192.168.4.225
+ dns-server 8.8.8.8 8.8.4.4
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER LANTAI 5 - ARA Tech
+========================================
+#
+
+end
+write memory

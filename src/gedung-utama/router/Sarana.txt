@@ -1,0 +1,70 @@
+!============================================
+! ROUTER SARANA - Sub-router Gedung Utama
+! Departemen: Sarana Prasarana (45 host)
+! Network: 192.168.4.128/26
+!============================================
+
+enable
+configure terminal
+
+hostname Router-Sarana
+
+! Interface ke Router Gedung Utama
+interface FastEthernet0/0
+ description Connection to Router-Gedung-Utama
+ ip address 192.168.6.10 255.255.255.252
+ no shutdown
+
+! Interface ke Switch Sarana (Client)
+interface FastEthernet1/0
+ description Connection to Switch-Sarana
+ ip address 192.168.4.129 255.255.255.192
+ no shutdown
+
+!============================================
+! OSPF Configuration
+!============================================
+
+router ospf 1
+ router-id 2.2.2.30
+ network 192.168.6.8 0.0.0.3 area 1
+ network 192.168.4.128 0.0.0.63 area 1
+ passive-interface FastEthernet1/0
+
+!============================================
+! DHCP Pool untuk Sarana Prasarana
+!============================================
+
+ip dhcp excluded-address 192.168.4.129 192.168.4.135
+ip dhcp pool Sarana-Pool
+ network 192.168.4.128 255.255.255.192
+ default-router 192.168.4.129
+ dns-server 8.8.8.8 8.8.4.4
+
+!============================================
+! Basic Configuration
+!============================================
+
+ip routing
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER SARANA - Sarana Prasarana
+========================================
+#
+
+end
+write memory
