@@ -1,0 +1,72 @@
+!============================================
+! SWITCH TRUNK - Lantai 4
+! Main switch for VLAN trunking
+!============================================
+
+enable
+configure terminal
+
+hostname Switch-Trunk-L4
+
+! Create VLANs
+vlan 10
+ name Customer-Service
+vlan 20
+ name Keuangan
+vlan 30
+ name Legal
+
+! Trunk port to Router Lantai 4
+interface FastEthernet0/1
+ description Trunk to Router-Lantai4
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+ no shutdown
+
+! Trunk to Customer Service Switch
+interface FastEthernet0/2
+ description Trunk to Switch-CS
+ switchport mode trunk
+ switchport trunk allowed vlan 10
+ no shutdown
+
+! Trunk to Keuangan Switch
+interface FastEthernet0/3
+ description Trunk to Switch-Keuangan
+ switchport mode trunk
+ switchport trunk allowed vlan 20
+ no shutdown
+
+! Trunk to Legal Switch
+interface FastEthernet0/4
+ description Trunk to Switch-Legal
+ switchport mode trunk
+ switchport trunk allowed vlan 30
+ no shutdown
+
+!============================================
+! Basic Configuration
+!============================================
+
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 15
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ SWITCH TRUNK LANTAI 4 - ARA Tech
+========================================
+#
+
+end
+write memory

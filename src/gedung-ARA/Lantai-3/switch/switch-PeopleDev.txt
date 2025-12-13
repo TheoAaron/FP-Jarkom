@@ -1,0 +1,62 @@
+!============================================
+! SWITCH PEOPLE DEVELOPMENT - Lantai 3
+! Access switch for VLAN 20
+!============================================
+
+enable
+configure terminal
+
+hostname Switch-PeopleDev
+
+! Create VLAN
+vlan 20
+ name People-Dev
+
+! Trunk port to Trunk Switch
+interface FastEthernet0/1
+ description Trunk to Switch-Trunk-L3
+ switchport mode trunk
+ switchport trunk allowed vlan 20
+ no shutdown
+
+! Access ports for People Development devices
+interface range FastEthernet0/2-24
+ description People Dev Devices
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+ no shutdown
+
+interface range GigabitEthernet0/1-2
+ description People Dev Devices
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+ no shutdown
+
+!============================================
+! Basic Configuration
+!============================================
+
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 15
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ SWITCH PEOPLE DEVELOPMENT - ARA Tech
+========================================
+#
+
+end
+write memory

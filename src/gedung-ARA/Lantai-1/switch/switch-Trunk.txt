@@ -1,0 +1,72 @@
+!============================================
+! SWITCH TRUNK - Lantai 1
+! Main switch for VLAN trunking
+!============================================
+
+enable
+configure terminal
+
+hostname Switch-Trunk-L1
+
+! Create VLANs
+vlan 10
+ name IT-Support
+vlan 20
+ name Server-Room
+vlan 30
+ name Cybersecurity
+
+! Trunk port to Router Lantai 1
+interface FastEthernet0/1
+ description Trunk to Router-Lantai1
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30
+ no shutdown
+
+! Trunk to IT Support Switch
+interface FastEthernet0/2
+ description Trunk to Switch-IT-Support
+ switchport mode trunk
+ switchport trunk allowed vlan 10
+ no shutdown
+
+! Trunk to Server Room Switch
+interface FastEthernet0/3
+ description Trunk to Switch-Server
+ switchport mode trunk
+ switchport trunk allowed vlan 20
+ no shutdown
+
+! Trunk to Cybersecurity Switch
+interface FastEthernet0/4
+ description Trunk to Switch-Cybersecurity
+ switchport mode trunk
+ switchport trunk allowed vlan 30
+ no shutdown
+
+!============================================
+! Basic Configuration
+!============================================
+
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 15
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ SWITCH TRUNK LANTAI 1 - ARA Tech
+========================================
+#
+
+end
+write memory

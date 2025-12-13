@@ -1,0 +1,62 @@
+!============================================
+! SWITCH SALES - Lantai 2
+! Access switch for VLAN 20
+!============================================
+
+enable
+configure terminal
+
+hostname Switch-Sales
+
+! Create VLAN
+vlan 20
+ name Sales
+
+! Trunk port to Trunk Switch
+interface FastEthernet0/1
+ description Trunk to Switch-Trunk-L2
+ switchport mode trunk
+ switchport trunk allowed vlan 20
+ no shutdown
+
+! Access ports for Sales devices
+interface range FastEthernet0/2-24
+ description Sales Devices
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+ no shutdown
+
+interface range GigabitEthernet0/1-2
+ description Sales Devices
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+ no shutdown
+
+!============================================
+! Basic Configuration
+!============================================
+
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 15
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ SWITCH SALES - ARA Tech
+========================================
+#
+
+end
+write memory

@@ -18,7 +18,10 @@ interface FastEthernet0/0
 ! Interface ke Switch Kurikulum (Client)
 interface FastEthernet1/0
  description Connection to Switch-Kurikulum
- ip address 192.168.2.1 255.255.254.0
+ ip address 192.168.2.2 255.255.255.192
+ standby 2 ip 192.168.2.1
+ standby 2 priority 110
+ standby 2 preempt
  no shutdown
 
 !============================================
@@ -28,7 +31,7 @@ interface FastEthernet1/0
 router ospf 1
  router-id 2.2.2.20
  network 192.168.6.4 0.0.0.3 area 1
- network 192.168.2.0 0.0.1.255 area 1
+ network 192.168.2.0 0.0.0.63 area 1
  passive-interface FastEthernet1/0
  area 1 stub
 
@@ -38,7 +41,7 @@ router ospf 1
 
 ip dhcp excluded-address 192.168.2.1 192.168.2.10
 ip dhcp pool Kurikulum-Pool
- network 192.168.2.0 255.255.254.0
+ network 192.168.2.0 255.255.255.192
  default-router 192.168.2.1
  dns-server 8.8.8.8
 
@@ -62,7 +65,7 @@ enable secret class
 
 banner motd #
 ========================================
- ROUTER KURIKULUM - Kurikulum & Penjaminan Mutu
+ ROUTER KURIKULUM - Backup Kurikulum
 ========================================
 #
 

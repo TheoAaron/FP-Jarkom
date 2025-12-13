@@ -50,6 +50,12 @@ interface FastEthernet6/0
  ip address 192.168.6.21 255.255.255.252
  no shutdown
 
+! Interface ke Router RKurikulum (Backup Router Kurikulum)
+interface FastEthernet7/0
+ description Connection to Router-RKurikulum (Backup)
+ ip address 192.168.6.25 255.255.255.252
+ no shutdown
+
 !============================================
 ! OSPF Configuration - Area 1
 !============================================

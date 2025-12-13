@@ -1,0 +1,62 @@
+!============================================
+! SWITCH CYBERSECURITY - Lantai 1
+! Access switch for VLAN 30
+!============================================
+
+enable
+configure terminal
+
+hostname Switch-Cybersecurity
+
+! Create VLAN
+vlan 30
+ name Cybersecurity
+
+! Trunk port to Trunk Switch
+interface FastEthernet0/1
+ description Trunk to Switch-Trunk-L1
+ switchport mode trunk
+ switchport trunk allowed vlan 30
+ no shutdown
+
+! Access ports for Cybersecurity devices
+interface range FastEthernet0/2-24
+ description Cybersecurity Devices
+ switchport mode access
+ switchport access vlan 30
+ spanning-tree portfast
+ no shutdown
+
+interface range GigabitEthernet0/1-2
+ description Cybersecurity Servers
+ switchport mode access
+ switchport access vlan 30
+ spanning-tree portfast
+ no shutdown
+
+!============================================
+! Basic Configuration
+!============================================
+
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 15
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ SWITCH CYBERSECURITY - ARA Tech
+========================================
+#
+
+end
+write memory

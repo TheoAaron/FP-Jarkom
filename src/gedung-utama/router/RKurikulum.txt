@@ -12,15 +12,13 @@ hostname Router-RKurikulum
 ! Interface ke Router Gedung Utama
 interface FastEthernet0/0
  description Connection to Router-Gedung-Utama (Backup)
- ip address 192.168.6.7 255.255.255.252
- standby 1 ip 192.168.6.6
- standby 1 priority 90
+ ip address 192.168.6.26 255.255.255.252
  no shutdown
 
 ! Interface ke Switch Kurikulum (Client)
 interface FastEthernet1/0
  description Connection to Switch-Kurikulum (Backup)
- ip address 192.168.2.2 255.255.254.0
+ ip address 192.168.2.3 255.255.255.192
  standby 2 ip 192.168.2.1
  standby 2 priority 90
  no shutdown
@@ -31,9 +29,10 @@ interface FastEthernet1/0
 
 router ospf 1
  router-id 2.2.2.21
- network 192.168.6.4 0.0.0.3 area 1
- network 192.168.2.0 0.0.1.255 area 1
+ network 192.168.6.24 0.0.0.3 area 1
+ network 192.168.2.0 0.0.0.63 area 1
  passive-interface FastEthernet1/0
+ area 1 stub
 
 !============================================
 ! Basic Configuration

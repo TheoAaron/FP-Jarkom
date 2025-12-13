@@ -1,0 +1,63 @@
+!============================================
+! SWITCH TRUNK - Lantai 3
+! Main switch for VLAN trunking
+!============================================
+
+enable
+configure terminal
+
+hostname Switch-Trunk-L3
+
+! Create VLANs
+vlan 10
+ name RnD
+vlan 20
+ name People-Dev
+
+! Trunk port to Router Lantai 3
+interface FastEthernet0/1
+ description Trunk to Router-Lantai3
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20
+ no shutdown
+
+! Trunk to R&D Switch
+interface FastEthernet0/2
+ description Trunk to Switch-RnD
+ switchport mode trunk
+ switchport trunk allowed vlan 10
+ no shutdown
+
+! Trunk to People Development Switch
+interface FastEthernet0/3
+ description Trunk to Switch-PeopleDev
+ switchport mode trunk
+ switchport trunk allowed vlan 20
+ no shutdown
+
+!============================================
+! Basic Configuration
+!============================================
+
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 15
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ SWITCH TRUNK LANTAI 3 - ARA Tech
+========================================
+#
+
+end
+write memory
