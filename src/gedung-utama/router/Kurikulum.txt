@@ -30,6 +30,7 @@ router ospf 1
  network 192.168.6.4 0.0.0.3 area 1
  network 192.168.2.0 0.0.1.255 area 1
  passive-interface FastEthernet1/0
+ area 1 stub
 
 !============================================
 ! DHCP Pool untuk Kurikulum

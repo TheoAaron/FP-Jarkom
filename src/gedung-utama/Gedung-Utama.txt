@@ -27,25 +27,25 @@ interface FastEthernet2/0
  no shutdown
 
 ! Interface ke Router Sarana (Sub-router)
-interface FastEthernet1/0
+interface FastEthernet3/0
  description Connection to Router-Sarana
  ip address 192.168.6.9 255.255.255.252
  no shutdown
 
 ! Interface ke Router Pembinaan (Sub-router)
-interface FastEthernet1/1
+interface FastEthernet4/0
  description Connection to Router-Pembinaan
  ip address 192.168.6.13 255.255.255.252
  no shutdown
 
 ! Interface ke Router IT (Sub-router)
-interface FastEthernet2/0
+interface FastEthernet5/0
  description Connection to Router-IT
  ip address 192.168.6.17 255.255.255.252
  no shutdown
 
 ! Interface ke Router Operasional (Sub-router)
-interface FastEthernet2/1
+interface FastEthernet6/0
  description Connection to Router-Operasional
  ip address 192.168.6.21 255.255.255.252
  no shutdown
@@ -58,7 +58,6 @@ router ospf 1
  router-id 2.2.2.2
  network 192.168.254.0 0.0.0.3 area 0
  network 192.168.6.0 0.0.0.31 area 1
- network 192.168.0.0 0.0.5.255 area 1
  area 1 stub
 
 !============================================
@@ -78,7 +77,7 @@ line con 0
 line vty 0 4
  password cisco
  login
- transport input ssh telnet
+ transport input telnet
 
 ! Enable password
 enable secret class

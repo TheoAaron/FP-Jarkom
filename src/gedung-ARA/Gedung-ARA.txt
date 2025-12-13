@@ -80,7 +80,7 @@ line con 0
 line vty 0 4
  password cisco
  login
- transport input ssh telnet
+ transport input telnet
 
 ! Enable password
 enable secret class
