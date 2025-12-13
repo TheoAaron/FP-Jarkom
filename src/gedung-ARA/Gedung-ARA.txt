@@ -27,19 +27,19 @@ interface FastEthernet2/0
  no shutdown
 
 ! Interface ke Router Lantai 3
-interface FastEthernet1/0
+interface FastEthernet3/0
  description Connection to Router-Lantai3
  ip address 192.168.20.9 255.255.255.252
  no shutdown
 
 ! Interface ke Router Lantai 4
-interface FastEthernet1/1
+interface FastEthernet4/0
  description Connection to Router-Lantai4
  ip address 192.168.20.13 255.255.255.252
  no shutdown
 
 ! Interface ke Router Lantai 5
-interface FastEthernet2/0
+interface FastEthernet5/0
  description Connection to Router-Lantai5
  ip address 192.168.20.17 255.255.255.252
  no shutdown

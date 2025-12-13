@@ -28,7 +28,7 @@ interface range FastEthernet0/2-24
  no shutdown
 
 interface range GigabitEthernet0/1-2
- description People Dev Devices
+ description People Dev Servers
  switchport mode access
  switchport access vlan 20
  spanning-tree portfast

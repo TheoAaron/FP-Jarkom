@@ -16,7 +16,7 @@ interface FastEthernet0/0
  no shutdown
 
 ! Interface ke Switch Regional Office (Client)
-interface FastEthernet1/0
+interface FastEthernet0/1
  description Connection to Switch-Regional-Office
  ip address 192.168.24.1 255.255.255.192
  no shutdown
@@ -41,7 +41,7 @@ router ospf 1
  router-id 4.4.4.4
  network 10.10.10.0 0.0.0.3 area 3
  network 192.168.24.0 0.0.0.63 area 3
- passive-interface FastEthernet1/0
+ passive-interface FastEthernet0/0
 
 !============================================
 ! Static Routes

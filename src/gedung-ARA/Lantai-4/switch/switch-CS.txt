@@ -28,7 +28,7 @@ interface range FastEthernet0/2-24
  no shutdown
 
 interface range GigabitEthernet0/1-2
- description CS Devices
+ description CS Servers
  switchport mode access
  switchport access vlan 10
  spanning-tree portfast

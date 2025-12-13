@@ -6,7 +6,7 @@
 enable
 configure terminal
 
-hostname Router-Kantor
+hostname Router-Kantor-Utama
 
 ! Interface ke Router Edge (Internet)
 interface FastEthernet0/0
@@ -16,14 +16,14 @@ interface FastEthernet0/0
  no shutdown
 
 ! Interface ke Router Gedung Utama
-interface FastEthernet1/0
+interface FastEthernet0/1
  description Connection to Gedung-Utama
  ip address 192.168.254.1 255.255.255.252
  ip nat inside
  no shutdown
 
 ! Interface ke Router Gedung ARA
-interface FastEthernet2/0
+interface FastEthernet1/0
  description Connection to Gedung-ARA
  ip address 192.168.254.5 255.255.255.252
  ip nat inside
@@ -57,9 +57,10 @@ router ospf 1
  network 192.168.254.0 0.0.0.3 area 0
  network 192.168.254.4 0.0.0.3 area 0
  network 10.10.10.0 0.0.0.3 area 3
+ default-information originate
  passive-interface default
+ no passive-interface FastEthernet0/1
  no passive-interface FastEthernet1/0
- no passive-interface FastEthernet2/0
  no passive-interface Tunnel0
 
 !============================================

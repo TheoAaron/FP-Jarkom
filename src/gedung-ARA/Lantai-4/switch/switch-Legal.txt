@@ -28,7 +28,7 @@ interface range FastEthernet0/2-24
  no shutdown
 
 interface range GigabitEthernet0/1-2
- description Legal Devices
+ description Legal Servers
  switchport mode access
  switchport access vlan 30
  spanning-tree portfast

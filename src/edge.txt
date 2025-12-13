@@ -15,8 +15,8 @@ interface FastEthernet0/0
  no shutdown
 
 ! Interface ke Router Kantor
-interface FastEthernet1/0
- description Connection to Router-Kantor
+interface FastEthernet0/1
+ description Connection to Router-Kantor-Utama
  ip address 203.0.113.1 255.255.255.252
  no shutdown
 
