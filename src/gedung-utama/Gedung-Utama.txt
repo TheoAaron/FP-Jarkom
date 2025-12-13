@@ -65,7 +65,6 @@ router ospf 1
 ! Basic Configuration
 !============================================
 
-ip routing
 no ip domain-lookup
 service password-encryption
 

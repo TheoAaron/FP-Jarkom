@@ -84,7 +84,6 @@ ip dhcp pool Legal-Pool
 ! Basic Configuration
 !============================================
 
-ip routing
 no ip domain-lookup
 service password-encryption
 
