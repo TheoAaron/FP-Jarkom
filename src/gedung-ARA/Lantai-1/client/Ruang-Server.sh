@@ -15,13 +15,11 @@ IP_ADDRESS="192.168.18.34"  # Server IP
 NETMASK="255.255.255.240"
 GATEWAY="192.168.18.33"
 DNS1="8.8.8.8"
-DNS2="8.8.4.4"
 
 # Configure Static IP
 sudo ifconfig $INTERFACE $IP_ADDRESS netmask $NETMASK
 sudo route add default gw $GATEWAY
 echo "nameserver $DNS1" | sudo tee /etc/resolv.conf
-echo "nameserver $DNS2" | sudo tee -a /etc/resolv.conf
 
 # Verify Configuration
 echo "Server IP Configuration:"

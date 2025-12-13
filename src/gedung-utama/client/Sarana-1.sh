@@ -19,12 +19,10 @@ sudo dhclient     # Request new DHCP lease
 # NETMASK="255.255.255.192"
 # GATEWAY="192.168.4.129"
 # DNS1="8.8.8.8"
-# DNS2="8.8.4.4"
 
 # sudo ifconfig $INTERFACE $IP_ADDRESS netmask $NETMASK
 # sudo route add default gw $GATEWAY
 # echo "nameserver $DNS1" | sudo tee /etc/resolv.conf
-# echo "nameserver $DNS2" | sudo tee -a /etc/resolv.conf
 
 # Verify Configuration
 echo "IP Configuration:"
