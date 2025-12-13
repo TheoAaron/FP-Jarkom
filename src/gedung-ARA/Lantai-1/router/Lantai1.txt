@@ -64,14 +64,14 @@ ip dhcp excluded-address 192.168.16.129 192.168.16.135
 ip dhcp pool ITSupport-Pool
  network 192.168.16.128 255.255.255.192
  default-router 192.168.16.129
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! Cybersecurity DHCP
 ip dhcp excluded-address 192.168.17.193 192.168.17.198
 ip dhcp pool Cybersecurity-Pool
  network 192.168.17.192 255.255.255.224
  default-router 192.168.17.193
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! Server - Static IP only (no DHCP)
 

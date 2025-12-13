@@ -64,21 +64,21 @@ ip dhcp excluded-address 192.168.5.1 192.168.5.5
 ip dhcp pool Executive-Pool
  network 192.168.5.0 255.255.255.240
  default-router 192.168.5.1
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! Guest Lounge DHCP
 ip dhcp excluded-address 192.168.5.17 192.168.5.20
 ip dhcp pool Guest-Pool
  network 192.168.5.16 255.255.255.240
  default-router 192.168.5.17
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! Auditorium DHCP
 ip dhcp excluded-address 192.168.4.225 192.168.4.230
 ip dhcp pool Auditorium-Pool
  network 192.168.4.224 255.255.255.224
  default-router 192.168.4.225
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 !============================================
 ! Basic Configuration

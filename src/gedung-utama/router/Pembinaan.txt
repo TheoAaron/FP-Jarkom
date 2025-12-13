@@ -39,7 +39,7 @@ ip dhcp excluded-address 192.168.4.193 192.168.4.198
 ip dhcp pool Pembinaan-Pool
  network 192.168.4.192 255.255.255.224
  default-router 192.168.4.193
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 !============================================
 ! Basic Configuration

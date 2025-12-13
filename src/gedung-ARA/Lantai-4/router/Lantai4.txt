@@ -64,21 +64,21 @@ ip dhcp excluded-address 192.168.16.193 192.168.16.200
 ip dhcp pool CS-Pool
  network 192.168.16.192 255.255.255.192
  default-router 192.168.16.193
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! Keuangan DHCP
 ip dhcp excluded-address 192.168.17.65 192.168.17.72
 ip dhcp pool Keuangan-Pool
  network 192.168.17.64 255.255.255.192
  default-router 192.168.17.65
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! Legal DHCP
 ip dhcp excluded-address 192.168.18.1 192.168.18.7
 ip dhcp pool Legal-Pool
  network 192.168.18.0 255.255.255.224
  default-router 192.168.18.1
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 !============================================
 ! Basic Configuration

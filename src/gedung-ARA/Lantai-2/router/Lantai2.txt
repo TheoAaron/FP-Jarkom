@@ -64,21 +64,21 @@ ip dhcp excluded-address 192.168.17.1 192.168.17.10
 ip dhcp pool Marketing-Pool
  network 192.168.17.0 255.255.255.192
  default-router 192.168.17.1
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! Sales DHCP
 ip dhcp excluded-address 192.168.17.129 192.168.17.135
 ip dhcp pool Sales-Pool
  network 192.168.17.128 255.255.255.224
  default-router 192.168.17.129
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! HR DHCP
 ip dhcp excluded-address 192.168.17.161 192.168.17.167
 ip dhcp pool HR-Pool
  network 192.168.17.160 255.255.255.224
  default-router 192.168.17.161
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 !============================================
 ! Basic Configuration

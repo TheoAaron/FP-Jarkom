@@ -55,14 +55,14 @@ ip dhcp excluded-address 192.168.16.1 192.168.16.10
 ip dhcp pool RnD-Pool
  network 192.168.16.0 255.255.255.128
  default-router 192.168.16.1
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 ! People Development DHCP
 ip dhcp excluded-address 192.168.17.225 192.168.17.230
 ip dhcp pool PeopleDev-Pool
  network 192.168.17.224 255.255.255.224
  default-router 192.168.17.225
- dns-server 8.8.8.8 8.8.4.4
+ dns-server 8.8.8.8
 
 !============================================
 ! Basic Configuration
