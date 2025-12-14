@@ -1,7 +1,6 @@
 !============================================
-! ROUTER KANTOR CABANG - Branch Office Router
-! Fungsi: Router Kantor Cabang dengan GRE Tunnel
-! Network: 192.168.24.0/26
+! ROUTER KANTOR CABANG - Packet Tracer Version
+! Konfigurasi Minimal untuk GRE Tunnel
 !============================================
 
 enable
@@ -9,52 +8,50 @@ configure terminal
 
 hostname Router-Kantor-Cabang
 
-! Interface ke Internet/ISP (Public)
+!============================================
+! Interface Configuration
+!============================================
+
+! Interface ke Internet/ISP
 interface FastEthernet0/0
- description Connection to Internet (ISP)
  ip address 203.0.114.2 255.255.255.252
  no shutdown
 
-! Interface ke Switch Regional Office (Client)
+! Interface ke Switch Regional Office
 interface FastEthernet0/1
- description Connection to Switch-Regional-Office
  ip address 192.168.24.1 255.255.255.192
  no shutdown
 
 !============================================
-! GRE Tunnel ke Router Kantor (Main Office)
+! GRE TUNNEL - SIMPLIFIED FOR PACKET TRACER
 !============================================
 
 interface Tunnel0
- description GRE Tunnel to Router-Kantor (Main Office)
  ip address 10.10.10.2 255.255.255.252
- tunnel source 203.0.114.2
+ tunnel source FastEthernet0/0
  tunnel destination 203.0.113.2
  tunnel mode gre ip
  no shutdown
 
 !============================================
-! OSPF Configuration - Area 3 (via GRE Tunnel)
+! OSPF Configuration
 !============================================
 
 router ospf 1
  router-id 4.4.4.4
- network 10.10.10.0 0.0.0.3 area 3
- network 192.168.24.0 0.0.0.63 area 3
+ network 10.10.10.0 0.0.0.3 area 0
+ network 192.168.24.0 0.0.0.63 area 0
  passive-interface FastEthernet0/0
+ passive-interface FastEthernet0/1
 
 !============================================
 ! Static Routes
 !============================================
 
-! Default route ke Internet
 ip route 0.0.0.0 0.0.0.0 203.0.114.1
 
-! Static route ke jaringan internal via GRE Tunnel
-ip route 192.168.0.0 255.255.0.0 Tunnel0
-
 !============================================
-! DHCP Pool untuk Regional Office
+! DHCP Pool
 !============================================
 
 ip dhcp excluded-address 192.168.24.1 192.168.24.10
@@ -70,22 +67,18 @@ ip dhcp pool RegionalOffice-Pool
 no ip domain-lookup
 service password-encryption
 
-! Console
 line con 0
  password cisco
  login
  logging synchronous
 
-! VTY
 line vty 0 4
  password cisco
  login
  transport input telnet
 
-! Enable password
 enable secret class
 
-! Banner
 banner motd #
 ========================================
  ROUTER KANTOR CABANG - Branch Office

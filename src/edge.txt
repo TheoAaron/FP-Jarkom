@@ -20,6 +20,12 @@ interface FastEthernet0/1
  ip address 203.0.113.1 255.255.255.252
  no shutdown
 
+! Interface baru untuk Kantor Cabang
+interface FastEthernet1/0
+ description To Router-Kantor-Cabang
+ ip address 203.0.114.1 255.255.255.252
+ no shutdown
+
 ! Default route ke Internet (simulasi ISP gateway)
 ip route 0.0.0.0 0.0.0.0 10.0.0.2
 
