@@ -1,0 +1,74 @@
+!============================================
+! ROUTER ISP - Simulated Internet Service Provider
+! Fungsi: Routing antar Kantor-Utama dan Kantor-Cabang
+!============================================
+
+enable
+configure terminal
+
+hostname Internet
+
+! Interface ke Router Edge
+interface FastEthernet0/0
+ description Connection to Router-Edge
+ ip address 10.0.0.2 255.255.255.252
+ no shutdown
+
+! Interface ke Router Kantor-Cabang (Direct)
+interface FastEthernet0/1
+ description Connection to Router-Kantor-Cabang
+ ip address 203.0.114.1 255.255.255.252
+ no shutdown
+
+! Loopback untuk Simulasi Internet (Google DNS)
+interface Loopback0
+ description Internet Simulation (8.8.8.8)
+ ip address 8.8.8.8 255.255.255.255
+ no shutdown
+
+! Loopback untuk Simulasi Internet (Cloudflare DNS)
+interface Loopback1
+ description Internet Simulation (1.1.1.1)
+ ip address 1.1.1.1 255.255.255.255
+ no shutdown
+
+!============================================
+! Static Routes untuk GRE Tunnel
+!============================================
+
+! Route ke Kantor-Utama via Edge
+ip route 203.0.113.0 255.255.255.252 10.0.0.1
+
+! Route ke network internal via Edge
+ip route 192.168.0.0 255.255.0.0 10.0.0.1
+
+! Route ke Kantor-Cabang local network
+ip route 192.168.24.0 255.255.255.192 203.0.114.2
+
+!============================================
+! Basic Configuration
+!============================================
+
+no ip domain-lookup
+service password-encryption
+
+line con 0
+ password cisco
+ login
+ logging synchronous
+
+line vty 0 4
+ password cisco
+ login
+
+enable secret class
+
+banner motd #
+========================================
+ ROUTER ISP - Internet Service Provider
+ Simulated ISP Router
+========================================
+#
+
+end
+write memory
