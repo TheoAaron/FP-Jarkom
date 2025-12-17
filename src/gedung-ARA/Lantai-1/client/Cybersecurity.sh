@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Client Configuration - Cybersecurity
-# Network: 192.168.17.192/27
-# Gateway: 192.168.17.193
+# Network: 192.168.6.64/27
+# Gateway: 192.168.6.65
 # VLAN: 20
 #============================================
 
@@ -24,7 +24,7 @@ echo "DNS Configuration:"
 cat /etc/resolv.conf
 echo ""
 echo "Testing connectivity to gateway..."
-ping -c 4 192.168.17.193
+ping -c 4 192.168.6.65
 echo ""
 echo "Testing connectivity to Internet..."
 ping -c 4 8.8.8.8

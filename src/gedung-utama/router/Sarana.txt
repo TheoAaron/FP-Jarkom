@@ -12,7 +12,7 @@ hostname Router-Sarana
 ! Interface ke Router Gedung Utama
 interface FastEthernet0/0
  description Connection to Router-Gedung-Utama
- ip address 192.168.6.10 255.255.255.252
+ ip address 192.168.4.250 255.255.255.252
  no shutdown
 
 ! Interface ke Switch Sarana (Client)
@@ -27,7 +27,7 @@ interface FastEthernet1/0
 
 router ospf 1
  router-id 2.2.2.30
- network 192.168.6.8 0.0.0.3 area 1
+ network 192.168.4.248 0.0.0.3 area 1
  network 192.168.4.128 0.0.0.63 area 1
  passive-interface FastEthernet1/0
  area 1 stub

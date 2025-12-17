@@ -12,7 +12,7 @@ hostname Router-SDM
 ! Interface ke Router Gedung Utama
 interface FastEthernet0/0
  description Connection to Router-Gedung-Utama
- ip address 192.168.6.2 255.255.255.252
+ ip address 192.168.4.242 255.255.255.252
  no shutdown
 
 ! Interface ke Switch SDM (Client)
@@ -27,7 +27,7 @@ interface FastEthernet1/0
 
 router ospf 1
  router-id 2.2.2.10
- network 192.168.6.0 0.0.0.3 area 1
+ network 192.168.4.240 0.0.0.3 area 1
  network 192.168.4.0 0.0.0.127 area 1
  passive-interface FastEthernet1/0
  area 1 stub

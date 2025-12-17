@@ -12,9 +12,9 @@ hostname Switch-Trunk-L1
 vlan 10
  name IT-Support
 vlan 20
- name Server-Room
-vlan 30
  name Cybersecurity
+vlan 30
+ name Server-Room
 
 ! Trunk port to Router Lantai 1
 interface FastEthernet0/1
@@ -30,16 +30,16 @@ interface FastEthernet0/2
  switchport trunk allowed vlan 10
  no shutdown
 
-! Trunk to Server Room Switch
+! Trunk to Cybersecurity Switch
 interface FastEthernet0/3
- description Trunk to Switch-Server
+ description Trunk to Switch-Cybersecurity
  switchport mode trunk
  switchport trunk allowed vlan 20
  no shutdown
 
-! Trunk to Cybersecurity Switch
+! Trunk to Server Room Switch
 interface FastEthernet0/4
- description Trunk to Switch-Cybersecurity
+ description Trunk to Switch-Server
  switchport mode trunk
  switchport trunk allowed vlan 30
  no shutdown

@@ -12,28 +12,28 @@ hostname Router-Lantai1
 ! Interface ke Router Gedung ARA
 interface FastEthernet0/0
  description Connection to Router-Gedung-ARA
- ip address 192.168.20.2 255.255.255.252
+ ip address 192.168.9.2 255.255.255.252
  no shutdown
 
 ! Interface ke Switch IT Support (VLAN 10)
 interface FastEthernet1/0.10
  description IT Support Department
  encapsulation dot1Q 10
- ip address 192.168.16.129 255.255.255.192
+ ip address 192.168.6.1 255.255.255.192
  no shutdown
 
-! Interface ke Switch Server & Data Center (VLAN 20)
+! Interface ke Switch Cybersecurity (VLAN 20)
 interface FastEthernet1/0.20
- description Server & Data Center
+ description Cybersecurity Department
  encapsulation dot1Q 20
- ip address 192.168.18.33 255.255.255.240
+ ip address 192.168.6.65 255.255.255.224
  no shutdown
 
-! Interface ke Switch Cybersecurity (VLAN 30)
+! Interface ke Switch Server & Data Center (VLAN 30)
 interface FastEthernet1/0.30
- description Cybersecurity Department
+ description Server & Data Center
  encapsulation dot1Q 30
- ip address 192.168.17.193 255.255.255.224
+ ip address 192.168.6.97 255.255.255.240
  no shutdown
 
 ! Enable parent interface
@@ -46,10 +46,10 @@ interface FastEthernet1/0
 !============================================
 
 router eigrp 100
- network 192.168.20.0 0.0.0.3
- network 192.168.16.128 0.0.0.63
- network 192.168.17.192 0.0.0.31
- network 192.168.18.32 0.0.0.15
+ network 192.168.9.0 0.0.0.3
+ network 192.168.6.0 0.0.0.63
+ network 192.168.6.64 0.0.0.31
+ network 192.168.6.96 0.0.0.15
  passive-interface FastEthernet1/0.10
  passive-interface FastEthernet1/0.20
  passive-interface FastEthernet1/0.30
@@ -60,24 +60,24 @@ router eigrp 100
 !============================================
 
 ! IT Support DHCP
-ip dhcp excluded-address 192.168.16.129 192.168.16.135
+ip dhcp excluded-address 192.168.6.1 192.168.6.10
 ip dhcp pool ITSupport-Pool
- network 192.168.16.128 255.255.255.192
- default-router 192.168.16.129
- dns-server 8.8.8.8
-
-! Server Room DHCP
-ip dhcp excluded-address 192.168.18.33 192.168.18.38
-ip dhcp pool ServerRoom-Pool
- network 192.168.18.32 255.255.255.240
- default-router 192.168.18.33
+ network 192.168.6.0 255.255.255.192
+ default-router 192.168.6.1
  dns-server 8.8.8.8
 
 ! Cybersecurity DHCP
-ip dhcp excluded-address 192.168.17.193 192.168.17.198
+ip dhcp excluded-address 192.168.6.65 192.168.6.72
 ip dhcp pool Cybersecurity-Pool
- network 192.168.17.192 255.255.255.224
- default-router 192.168.17.193
+ network 192.168.6.64 255.255.255.224
+ default-router 192.168.6.65
+ dns-server 8.8.8.8
+
+! Server Room DHCP
+ip dhcp excluded-address 192.168.6.97 192.168.6.102
+ip dhcp pool ServerRoom-Pool
+ network 192.168.6.96 255.255.255.240
+ default-router 192.168.6.97
  dns-server 8.8.8.8
 
 !============================================

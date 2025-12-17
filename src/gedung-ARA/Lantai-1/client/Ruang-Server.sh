@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Server Configuration - Server & Data Center
-# Network: 192.168.18.32/28
-# Gateway: 192.168.18.33
+# Network: 192.168.6.96/28
+# Gateway: 192.168.6.97
 # VLAN: 30
 # Note: Menggunakan IP STATIC untuk server
 #============================================
@@ -11,9 +11,9 @@ echo "Configuring Server & Data Center..."
 
 # Static IP Configuration for Server
 INTERFACE="eth0"
-IP_ADDRESS="192.168.18.34"  # Server IP
+IP_ADDRESS="192.168.6.98"  # Server IP
 NETMASK="255.255.255.240"
-GATEWAY="192.168.18.33"
+GATEWAY="192.168.6.97"
 DNS1="8.8.8.8"
 
 # Configure Static IP

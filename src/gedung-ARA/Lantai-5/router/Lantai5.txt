@@ -12,28 +12,28 @@ hostname Router-Lantai5
 ! Interface ke Router Gedung ARA
 interface FastEthernet0/0
  description Connection to Router-Gedung-ARA
- ip address 192.168.20.18 255.255.255.252
+ ip address 192.168.11.2 255.255.255.252
  no shutdown
 
 ! Interface ke Switch Executive Office (VLAN 10)
 interface FastEthernet1/0.10
  description Executive Office
  encapsulation dot1Q 10
- ip address 192.168.5.1 255.255.255.240
+ ip address 192.168.8.1 255.255.255.240
  no shutdown
 
 ! Interface ke Switch Guest Lounge (VLAN 20)
 interface FastEthernet1/0.20
  description Guest Lounge
  encapsulation dot1Q 20
- ip address 192.168.5.17 255.255.255.240
+ ip address 192.168.8.17 255.255.255.240
  no shutdown
 
 ! Interface ke Switch Auditorium (VLAN 30)
 interface FastEthernet1/0.30
  description Auditorium
  encapsulation dot1Q 30
- ip address 192.168.4.225 255.255.255.224
+ ip address 192.168.8.33 255.255.255.224
  no shutdown
 
 ! Enable parent interface
@@ -46,10 +46,10 @@ interface FastEthernet1/0
 !============================================
 
 router eigrp 100
- network 192.168.20.16 0.0.0.3
- network 192.168.5.0 0.0.0.15
- network 192.168.5.16 0.0.0.15
- network 192.168.4.224 0.0.0.31
+ network 192.168.11.0 0.0.0.3
+ network 192.168.8.0 0.0.0.15
+ network 192.168.8.16 0.0.0.15
+ network 192.168.8.32 0.0.0.31
  passive-interface FastEthernet1/0.10
  passive-interface FastEthernet1/0.20
  passive-interface FastEthernet1/0.30
@@ -60,24 +60,24 @@ router eigrp 100
 !============================================
 
 ! Executive Office DHCP
-ip dhcp excluded-address 192.168.5.1 192.168.5.5
+ip dhcp excluded-address 192.168.8.1 192.168.8.5
 ip dhcp pool Executive-Pool
- network 192.168.5.0 255.255.255.240
- default-router 192.168.5.1
+ network 192.168.8.0 255.255.255.240
+ default-router 192.168.8.1
  dns-server 8.8.8.8
 
 ! Guest Lounge DHCP
-ip dhcp excluded-address 192.168.5.17 192.168.5.20
+ip dhcp excluded-address 192.168.8.17 192.168.8.20
 ip dhcp pool Guest-Pool
- network 192.168.5.16 255.255.255.240
- default-router 192.168.5.17
+ network 192.168.8.16 255.255.255.240
+ default-router 192.168.8.17
  dns-server 8.8.8.8
 
 ! Auditorium DHCP
-ip dhcp excluded-address 192.168.4.225 192.168.4.230
+ip dhcp excluded-address 192.168.8.33 192.168.8.37
 ip dhcp pool Auditorium-Pool
- network 192.168.4.224 255.255.255.224
- default-router 192.168.4.225
+ network 192.168.8.32 255.255.255.224
+ default-router 192.168.8.33
  dns-server 8.8.8.8
 
 !============================================

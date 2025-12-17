@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Client Configuration - People Development
-# Network: 192.168.17.224/27
-# Gateway: 192.168.17.225
+# Network: 192.168.7.64/27
+# Gateway: 192.168.7.65
 # VLAN: 20
 #============================================
 
@@ -24,7 +24,7 @@ echo "DNS Configuration:"
 cat /etc/resolv.conf
 echo ""
 echo "Testing connectivity to gateway..."
-ping -c 4 192.168.17.225
+ping -c 4 192.168.7.65
 echo ""
 echo "Testing connectivity to Internet..."
 ping -c 4 8.8.8.8

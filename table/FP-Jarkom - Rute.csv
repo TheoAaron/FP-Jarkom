@@ -1,41 +1,56 @@
-GEDUNG UTAMA,,,,,,
-Nama Subnet,Rute,Jumlah IP,Netmask,,,
-A1,Gedung Utama > SDM,2,/30,,,
-A2,Gedung Utama > SDM > Switch0 > RSDM > SDM-1,95,/25,,,
-A3,Gedung Utama > Kurikulum,2,/30,,,
-A4,Gedung Utama > Kurikulum > Switch1 > RKurikulum > Kurikulum-1,220,/24,,,
-A5,Gedung Utama > Sarana,2,/30,,,
-A6,Gedung Utama > Sarana > Switch2 > RSarana > Sarana-1,45,/26,,,
-A7,Gedung Utama > Pembinaan,2,/30,,,
-A8,Gedung Utama > Pembinaan > Switch3 > RPembinaan > Pembinaan-1,18,/27,,,
-A9,Gedung Utama > IT,2,/30,,,
-A10,"Gedung Utama > IT > Switch4 > RIT > IT-1,  ServerIT-1",6,/29,,,
-A11,Gedung Utama > Operasional,2,/30,,,
-A12,Gedung Utama > Operasional > Switch5 > ROperasional > Operasional-1,380,/23,,,
-TOTAL,,776,/22,,,
-,,,,,,
-GEDUNG ARA,,,,,,
-Nama Subnet,Rute,Jumlah IP,Netmask,,,
-A13,Gedung ARA > Switch6 > Lantai 1,2,/30,,,
-A14,Gedung ARA > Switch6 > Lantai 2,2,/30,,,
-A15,Gedung ARA > Switch6 > Lantai 3,2,/30,,,
-A16,Gedung ARA > Switch6 > Lantai 4,2,/30,,,
-A17,Gedung ARA > Switch6 > Lantai 5,2,/30,,,
-A18,Gedung ARA > Switch6 > Lantai 1 > IT Support,45,/26,,,
-A19,Gedung ARA > Switch6 > Lantai 1 > Ruang Server ,12,/28,,,
-A20,Gedung ARA > Switch6 > Lantai 1 >  Cybersecurity,22,/27,,,
-A21,Gedung ARA > Switch6 > Lantai 2 > Marketing,35,/26,,,
-A22,Gedung ARA > Switch6 > Lantai 2 > Sales,25,/27,,,
-A23,Gedung ARA > Switch6 > Lantai 2 > HR,25,/27,,,
-A24,Gedung ARA > Switch6 > Lantai 3 > RnD,55,/26,,,
-A25,Gedung ARA > Switch6 > Lantai 3 > People-Dev,18,/27,,,
-A26,Gedung ARA > Switch6 > Lantai 4 > Keuangan ,28,/27,,,
-A27,Gedung ARA > Switch6 > Lantai 4 > Legal,18,/27,,,
-A28,Gedung ARA > Switch6 > Lantai 4 > CS,40,/26,,,
-A29,Gedung ARA > Switch6 > Lantai 5 > Executive,12,/28,,Format,Router > Node
-A30,Gedung ARA > Switch6 > Lantai 5 > Guest Lounge,10,/28,,,Router > Switch > Node > Switch > Node
-A31,Gedung ARA > Switch6 > Lantai 5 > Auditorium,5,/29,,,
-TOTAL,,360,/23,,,
-,,,,,,Router > Switch > Node
-,,,,,,Router > Router
-,,,,,,dst
+GEDUNG UTAMA,,,
+Nama Subnet,Rute,Jumlah IP,Netmask
+A1,Gedung Utama > SDM,2,/30
+A2,Gedung Utama > SDM > Switch0 > SDM-1,95,/25
+A3,Gedung Utama > Kurikulum,2,/30
+A4,Gedung Utama > Kurikulum > Switch1 > Kurikulum-1,220,/24
+A5,Gedung Utama > Sarana,2,/30
+A6,Gedung Utama > Sarana > Switch2 > Sarana-1,45,/26
+A7,Gedung Utama > Pembinaan,2,/30
+A8,Gedung Utama > Pembinaan > Switch3 > Pembinaan-1,18,/27
+A9,Gedung Utama > IT,2,/30
+A10,"Gedung Utama > IT > Switch4 > IT-1,  ServerIT-1",6,/29
+A11,Gedung Utama > Operasional,2,/30
+A12,Gedung Utama > Operasional > Switch5 > Operasional-1,380,/23
+TOTAL,,776,/22
+,,,
+GEDUNG ARA,,,
+Nama Subnet,Rute,Jumlah IP,Netmask
+A13,Gedung ARA > Switch6 > Lantai 1,2,/30
+A14,Gedung ARA > Switch6 > Lantai 2,2,/30
+A15,Gedung ARA > Switch6 > Lantai 3,2,/30
+A16,Gedung ARA > Switch6 > Lantai 4,2,/30
+A17,Gedung ARA > Switch6 > Lantai 5,2,/30
+A18,Gedung ARA > Switch6 > Lantai 1 > IT Support,45,/26
+A19,Gedung ARA > Switch6 > Lantai 1 > Ruang Server ,12,/28
+A20,Gedung ARA > Switch6 > Lantai 1 >  Cybersecurity,22,/27
+A21,Gedung ARA > Switch6 > Lantai 2 > Marketing,35,/26
+A22,Gedung ARA > Switch6 > Lantai 2 > Sales,25,/27
+A23,Gedung ARA > Switch6 > Lantai 2 > HR,25,/27
+A24,Gedung ARA > Switch6 > Lantai 3 > RnD,55,/26
+A25,Gedung ARA > Switch6 > Lantai 3 > People-Dev,18,/27
+A26,Gedung ARA > Switch6 > Lantai 4 > Keuangan ,28,/27
+A27,Gedung ARA > Switch6 > Lantai 4 > Legal,18,/27
+A28,Gedung ARA > Switch6 > Lantai 4 > CS,40,/26
+A29,Gedung ARA > Switch6 > Lantai 5 > Executive,12,/28
+A30,Gedung ARA > Switch6 > Lantai 5 > Guest Lounge,10,/28
+A31,Gedung ARA > Switch6 > Lantai 5 > Auditorium,5,/29
+TOTAL,,360,/23
+,,,
+KANTOR CABANG,,,
+Nama Subnet,Rute,Jumlah IP,Netmask
+A32,ISP > Kantor-Cabang,2,/30
+A33,ISP > Kantor-Cabang > Regional Office,40,/27
+TOTAL,,42,/27
+,,,
+GLOBAL SEGMENT,,,
+Nama Subnet,Rute,Jumlah IP,Netmask
+A35,ISP > Kantor-Utama,2,/30
+A36,ISP > Kantor-Utama > Gedung-Utama,2,/30
+A37,ISP > Kantor-Utama > Gedung-ARA,2,/30
+TOTAL,,6,/29
+,,,
+GRE TUNNELLING,,,
+Nama Subnet,Rute,Jumlah IP,Netmask
+A38,ISP > Kantor-Cabang,2,/30
+TOTAL,,2,/30

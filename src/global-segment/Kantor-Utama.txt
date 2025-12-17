@@ -1,6 +1,5 @@
 !============================================
-! ROUTER KANTOR UTAMA - Packet Tracer Version
-! Konfigurasi Minimal untuk GRE Tunnel
+! ROUTER KANTOR UTAMA 
 !============================================
 
 enable
@@ -20,18 +19,18 @@ interface FastEthernet0/0
 
 ! Interface ke Router Gedung Utama
 interface FastEthernet0/1
- ip address 192.168.254.1 255.255.255.252
+ ip address 192.168.5.85 255.255.255.252
  ip nat inside
  no shutdown
 
 ! Interface ke Router Gedung ARA
 interface FastEthernet1/0
- ip address 192.168.254.5 255.255.255.252
+ ip address 192.168.5.89 255.255.255.252
  ip nat inside
  no shutdown
 
 !============================================
-! GRE TUNNEL - SIMPLIFIED FOR PACKET TRACER
+! GRE TUNNEL
 !============================================
 
 interface Tunnel0
@@ -46,7 +45,6 @@ interface Tunnel0
 !============================================
 
 access-list 1 permit 192.168.0.0 0.0.255.255
-access-list 1 permit 10.10.10.0 0.0.0.3
 
 ip nat inside source list 1 interface FastEthernet0/0 overload
 
@@ -56,13 +54,14 @@ ip nat inside source list 1 interface FastEthernet0/0 overload
 
 router ospf 1
  router-id 1.1.1.1
- network 192.168.254.0 0.0.0.3 area 0
- network 192.168.254.4 0.0.0.3 area 0
+ network 192.168.5.84 0.0.0.3 area 0
+ network 192.168.5.88 0.0.0.3 area 0
  network 10.10.10.0 0.0.0.3 area 0
  default-information originate
  passive-interface default
  no passive-interface FastEthernet0/1
  no passive-interface FastEthernet1/0
+ no passive-interface Tunnel0
 
 !============================================
 ! Static Routes

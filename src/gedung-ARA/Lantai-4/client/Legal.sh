@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Client Configuration - Legal
-# Network: 192.168.18.0/27
-# Gateway: 192.168.18.1
+# Network: 192.168.7.224/27
+# Gateway: 192.168.7.225
 # VLAN: 30
 #============================================
 
@@ -24,7 +24,7 @@ echo "DNS Configuration:"
 cat /etc/resolv.conf
 echo ""
 echo "Testing connectivity to gateway..."
-ping -c 4 192.168.18.1
+ping -c 4 192.168.7.225
 echo ""
 echo "Testing connectivity to Internet..."
 ping -c 4 8.8.8.8

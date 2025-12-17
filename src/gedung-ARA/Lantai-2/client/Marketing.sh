@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Client Configuration - Marketing
-# Network: 192.168.17.0/26
-# Gateway: 192.168.17.1
+# Network: 192.168.6.128/26
+# Gateway: 192.168.6.129
 # VLAN: 10
 #============================================
 
@@ -24,7 +24,7 @@ echo "DNS Configuration:"
 cat /etc/resolv.conf
 echo ""
 echo "Testing connectivity to gateway..."
-ping -c 4 192.168.17.1
+ping -c 4 192.168.6.129
 echo ""
 echo "Testing connectivity to Internet..."
 ping -c 4 8.8.8.8

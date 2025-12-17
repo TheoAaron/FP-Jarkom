@@ -11,49 +11,43 @@ hostname Router-Gedung-Utama
 ! Interface ke Router Kantor
 interface FastEthernet0/0
  description Connection to Router-Kantor
- ip address 192.168.254.2 255.255.255.252
+ ip address 192.168.5.86 255.255.255.252
  no shutdown
 
 ! Interface ke Router SDM (Sub-router)
 interface FastEthernet1/0
  description Connection to Router-SDM
- ip address 192.168.6.1 255.255.255.252
+ ip address 192.168.4.241 255.255.255.252
  no shutdown
 
 ! Interface ke Router Kurikulum (Sub-router)
 interface FastEthernet2/0
  description Connection to Router-Kurikulum
- ip address 192.168.6.5 255.255.255.252
+ ip address 192.168.4.245 255.255.255.252
  no shutdown
 
 ! Interface ke Router Sarana (Sub-router)
 interface FastEthernet3/0
  description Connection to Router-Sarana
- ip address 192.168.6.9 255.255.255.252
+ ip address 192.168.4.249 255.255.255.252
  no shutdown
 
 ! Interface ke Router Pembinaan (Sub-router)
 interface FastEthernet4/0
  description Connection to Router-Pembinaan
- ip address 192.168.6.13 255.255.255.252
+ ip address 192.168.4.253 255.255.255.252
  no shutdown
 
 ! Interface ke Router IT (Sub-router)
 interface FastEthernet5/0
  description Connection to Router-IT
- ip address 192.168.6.17 255.255.255.252
+ ip address 192.168.5.1 255.255.255.252
  no shutdown
 
 ! Interface ke Router Operasional (Sub-router)
 interface FastEthernet6/0
  description Connection to Router-Operasional
- ip address 192.168.6.21 255.255.255.252
- no shutdown
-
-! Interface ke Router RKurikulum (Backup Router Kurikulum)
-interface FastEthernet7/0
- description Connection to Router-RKurikulum (Backup)
- ip address 192.168.6.25 255.255.255.252
+ ip address 192.168.5.5 255.255.255.252
  no shutdown
 
 !============================================
@@ -62,8 +56,9 @@ interface FastEthernet7/0
 
 router ospf 1
  router-id 2.2.2.2
- network 192.168.254.0 0.0.0.3 area 0
- network 192.168.6.0 0.0.0.31 area 1
+ network 192.168.5.84 0.0.0.3 area 0
+ network 192.168.4.240 0.0.0.15 area 1
+ network 192.168.5.0 0.0.0.7 area 1
  area 1 stub
 
 !============================================

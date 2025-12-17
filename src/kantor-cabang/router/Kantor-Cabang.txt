@@ -1,6 +1,5 @@
 !============================================
-! ROUTER KANTOR CABANG - Packet Tracer Version
-! Konfigurasi Minimal untuk GRE Tunnel
+! ROUTER KANTOR CABANG
 !============================================
 
 enable
@@ -19,11 +18,11 @@ interface FastEthernet0/0
 
 ! Interface ke Switch Regional Office
 interface FastEthernet0/1
- ip address 192.168.24.1 255.255.255.192
+ ip address 192.168.5.13 255.255.255.192
  no shutdown
 
 !============================================
-! GRE TUNNEL - SIMPLIFIED FOR PACKET TRACER
+! GRE TUNNEL
 !============================================
 
 interface Tunnel0
@@ -40,9 +39,9 @@ interface Tunnel0
 router ospf 1
  router-id 4.4.4.4
  network 10.10.10.0 0.0.0.3 area 0
- network 192.168.24.0 0.0.0.63 area 0
- passive-interface FastEthernet0/0
- passive-interface FastEthernet0/1
+ network 192.168.5.12 0.0.0.63 area 0
+ passive-interface default
+ no passive-interface Tunnel0
 
 !============================================
 ! Static Routes
@@ -54,11 +53,28 @@ ip route 0.0.0.0 0.0.0.0 203.0.114.1
 ! DHCP Pool
 !============================================
 
-ip dhcp excluded-address 192.168.24.1 192.168.24.10
+ip dhcp excluded-address 192.168.5.13 192.168.5.20
+
 ip dhcp pool RegionalOffice-Pool
- network 192.168.24.0 255.255.255.192
- default-router 192.168.24.1
+ network 192.168.5.12 255.255.255.192
+ default-router 192.168.5.13
  dns-server 8.8.8.8
+
+!============================================
+! Security ACL - Protect from Internet
+!============================================
+
+! Only allow established connections and GRE from outside
+access-list 102 remark Security - Block unsolicited inbound
+access-list 102 permit gre any any
+access-list 102 permit tcp any any established
+access-list 102 permit icmp any any echo-reply
+access-list 102 permit icmp any any echo
+access-list 102 deny ip any 192.168.5.12 0.0.0.63
+access-list 102 permit ip any any
+
+interface FastEthernet0/0
+ ip access-group 102 in
 
 !============================================
 ! Basic Configuration

@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Server Configuration - IT Pendidikan (Server)
-# Network: 192.168.5.32/28
-# Gateway: 192.168.5.33
+# Network: 192.168.4.224/28
+# Gateway: 192.168.4.225
 # Note: Menggunakan IP STATIC untuk server
 #============================================
 
@@ -10,9 +10,9 @@ echo "Configuring IT Pendidikan Server..."
 
 # Static IP Configuration for Server
 INTERFACE="eth0"
-IP_ADDRESS="192.168.5.34"  # Server IP
+IP_ADDRESS="192.168.4.226"  # Server IP
 NETMASK="255.255.255.240"
-GATEWAY="192.168.5.33"
+GATEWAY="192.168.4.225"
 DNS1="8.8.8.8"
 
 # Configure Static IP

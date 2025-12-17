@@ -12,21 +12,21 @@ hostname Router-Lantai3
 ! Interface ke Router Gedung ARA
 interface FastEthernet0/0
  description Connection to Router-Gedung-ARA
- ip address 192.168.20.10 255.255.255.252
+ ip address 192.168.10.2 255.255.255.252
  no shutdown
 
 ! Interface ke Switch R&D (VLAN 10)
 interface FastEthernet1/0.10
  description Research & Development
  encapsulation dot1Q 10
- ip address 192.168.16.1 255.255.255.128
+ ip address 192.168.7.1 255.255.255.192
  no shutdown
 
 ! Interface ke Switch People Development (VLAN 20)
 interface FastEthernet1/0.20
  description People Development
  encapsulation dot1Q 20
- ip address 192.168.17.225 255.255.255.224
+ ip address 192.168.7.65 255.255.255.224
  no shutdown
 
 ! Enable parent interface
@@ -39,9 +39,9 @@ interface FastEthernet1/0
 !============================================
 
 router eigrp 100
- network 192.168.20.8 0.0.0.3
- network 192.168.16.0 0.0.0.127
- network 192.168.17.224 0.0.0.31
+ network 192.168.10.0 0.0.0.3
+ network 192.168.7.0 0.0.0.63
+ network 192.168.7.64 0.0.0.31
  passive-interface FastEthernet1/0.10
  passive-interface FastEthernet1/0.20
  no auto-summary
@@ -51,17 +51,17 @@ router eigrp 100
 !============================================
 
 ! R&D DHCP
-ip dhcp excluded-address 192.168.16.1 192.168.16.10
+ip dhcp excluded-address 192.168.7.1 192.168.7.10
 ip dhcp pool RnD-Pool
- network 192.168.16.0 255.255.255.128
- default-router 192.168.16.1
+ network 192.168.7.0 255.255.255.192
+ default-router 192.168.7.1
  dns-server 8.8.8.8
 
 ! People Development DHCP
-ip dhcp excluded-address 192.168.17.225 192.168.17.230
+ip dhcp excluded-address 192.168.7.65 192.168.7.70
 ip dhcp pool PeopleDev-Pool
- network 192.168.17.224 255.255.255.224
- default-router 192.168.17.225
+ network 192.168.7.64 255.255.255.224
+ default-router 192.168.7.65
  dns-server 8.8.8.8
 
 !============================================

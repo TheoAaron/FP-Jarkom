@@ -11,57 +11,67 @@ hostname Router-Gedung-ARA
 ! Interface ke Router Kantor
 interface FastEthernet0/0
  description Connection to Router-Kantor
- ip address 192.168.254.6 255.255.255.252
+ ip address 192.168.5.90 255.255.255.252
  no shutdown
 
 ! Interface ke Router Lantai 1
 interface FastEthernet1/0
  description Connection to Router-Lantai1
- ip address 192.168.20.1 255.255.255.252
+ ip address 192.168.9.1 255.255.255.252
  no shutdown
 
 ! Interface ke Router Lantai 2
 interface FastEthernet2/0
  description Connection to Router-Lantai2
- ip address 192.168.20.5 255.255.255.252
+ ip address 192.168.9.129 255.255.255.252
  no shutdown
 
 ! Interface ke Router Lantai 3
 interface FastEthernet3/0
  description Connection to Router-Lantai3
- ip address 192.168.20.9 255.255.255.252
+ ip address 192.168.10.1 255.255.255.252
  no shutdown
 
 ! Interface ke Router Lantai 4
 interface FastEthernet4/0
  description Connection to Router-Lantai4
- ip address 192.168.20.13 255.255.255.252
+ ip address 192.168.10.129 255.255.255.252
  no shutdown
 
 ! Interface ke Router Lantai 5
 interface FastEthernet5/0
  description Connection to Router-Lantai5
- ip address 192.168.20.17 255.255.255.252
+ ip address 192.168.11.1 255.255.255.252
  no shutdown
 
 !============================================
-! OSPF Configuration - Area 2 (Backbone to Core)
+! OSPF Configuration - Area 0 (Backbone to Core)
 !============================================
 
 router ospf 1
  router-id 3.3.3.3
- network 192.168.254.4 0.0.0.3 area 0
+ network 192.168.5.88 0.0.0.3 area 0
  redistribute eigrp 100 subnets
+ passive-interface default
+ no passive-interface FastEthernet0/0
 
 !============================================
 ! EIGRP Configuration - Internal Building
 !============================================
 
 router eigrp 100
- network 192.168.16.0 0.0.7.255
- network 192.168.20.0 0.0.0.31
+ network 192.168.6.0 0.0.1.255
+ network 192.168.7.0 0.0.0.255
+ network 192.168.8.0 0.0.0.63
+ network 192.168.9.0 0.0.0.255
+ network 192.168.10.0 0.0.0.255
+ network 192.168.11.0 0.0.0.63
  redistribute ospf 1 metric 10000 100 255 1 1500
+ redistribute static
  no auto-summary
+
+! Static default route untuk EIGRP redistribution
+ip route 0.0.0.0 0.0.0.0 192.168.5.89
 
 !============================================
 ! Basic Configuration

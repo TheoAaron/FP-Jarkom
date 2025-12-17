@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Client Configuration - Auditorium
-# Network: 192.168.4.224/27
-# Gateway: 192.168.4.225
+# Network: 192.168.8.32/27
+# Gateway: 192.168.8.33
 # VLAN: 30
 #============================================
 
@@ -24,7 +24,7 @@ echo "DNS Configuration:"
 cat /etc/resolv.conf
 echo ""
 echo "Testing connectivity to gateway..."
-ping -c 4 192.168.4.225
+ping -c 4 192.168.8.33
 echo ""
 echo "Testing connectivity to Internet..."
 ping -c 4 8.8.8.8

@@ -12,28 +12,28 @@ hostname Router-Lantai4
 ! Interface ke Router Gedung ARA
 interface FastEthernet0/0
  description Connection to Router-Gedung-ARA
- ip address 192.168.20.14 255.255.255.252
+ ip address 192.168.10.130 255.255.255.252
  no shutdown
 
 ! Interface ke Switch Customer Service (VLAN 10)
 interface FastEthernet1/0.10
  description Customer Service Department
  encapsulation dot1Q 10
- ip address 192.168.16.193 255.255.255.192
+ ip address 192.168.7.129 255.255.255.192
  no shutdown
 
 ! Interface ke Switch Keuangan (VLAN 20)
 interface FastEthernet1/0.20
  description Finance Department
  encapsulation dot1Q 20
- ip address 192.168.17.65 255.255.255.192
+ ip address 192.168.7.193 255.255.255.224
  no shutdown
 
 ! Interface ke Switch Legal (VLAN 30)
 interface FastEthernet1/0.30
  description Legal Department
  encapsulation dot1Q 30
- ip address 192.168.18.1 255.255.255.224
+ ip address 192.168.7.225 255.255.255.224
  no shutdown
 
 ! Enable parent interface
@@ -46,10 +46,10 @@ interface FastEthernet1/0
 !============================================
 
 router eigrp 100
- network 192.168.20.12 0.0.0.3
- network 192.168.16.192 0.0.0.63
- network 192.168.17.64 0.0.0.63
- network 192.168.18.0 0.0.0.31
+ network 192.168.10.128 0.0.0.3
+ network 192.168.7.128 0.0.0.63
+ network 192.168.7.192 0.0.0.31
+ network 192.168.7.224 0.0.0.31
  passive-interface FastEthernet1/0.10
  passive-interface FastEthernet1/0.20
  passive-interface FastEthernet1/0.30
@@ -60,24 +60,24 @@ router eigrp 100
 !============================================
 
 ! Customer Service DHCP
-ip dhcp excluded-address 192.168.16.193 192.168.16.200
+ip dhcp excluded-address 192.168.7.129 192.168.7.136
 ip dhcp pool CS-Pool
- network 192.168.16.192 255.255.255.192
- default-router 192.168.16.193
+ network 192.168.7.128 255.255.255.192
+ default-router 192.168.7.129
  dns-server 8.8.8.8
 
 ! Keuangan DHCP
-ip dhcp excluded-address 192.168.17.65 192.168.17.72
+ip dhcp excluded-address 192.168.7.193 192.168.7.199
 ip dhcp pool Keuangan-Pool
- network 192.168.17.64 255.255.255.192
- default-router 192.168.17.65
+ network 192.168.7.192 255.255.255.224
+ default-router 192.168.7.193
  dns-server 8.8.8.8
 
 ! Legal DHCP
-ip dhcp excluded-address 192.168.18.1 192.168.18.7
+ip dhcp excluded-address 192.168.7.225 192.168.7.231
 ip dhcp pool Legal-Pool
- network 192.168.18.0 255.255.255.224
- default-router 192.168.18.1
+ network 192.168.7.224 255.255.255.224
+ default-router 192.168.7.225
  dns-server 8.8.8.8
 
 !============================================

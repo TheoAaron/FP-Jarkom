@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Client Configuration - Regional Office (Kantor Cabang)
-# Network: 192.168.24.0/26
-# Gateway: 192.168.24.1
+# Network: 192.168.5.12/26
+# Gateway: 192.168.5.13
 #============================================
 
 # Konfigurasi IP menggunakan DHCP
@@ -23,7 +23,7 @@ echo "DNS Configuration:"
 cat /etc/resolv.conf
 echo ""
 echo "Testing connectivity to gateway..."
-ping -c 4 192.168.24.1
+ping -c 4 192.168.5.13
 echo ""
 echo "Testing connectivity to Internet..."
 ping -c 4 8.8.8.8

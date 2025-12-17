@@ -1,8 +1,8 @@
 #!/bin/bash
 #============================================
 # Client Configuration - Keuangan (Finance)
-# Network: 192.168.17.64/26
-# Gateway: 192.168.17.65
+# Network: 192.168.7.192/27
+# Gateway: 192.168.7.193
 # VLAN: 20
 #============================================
 
@@ -24,7 +24,7 @@ echo "DNS Configuration:"
 cat /etc/resolv.conf
 echo ""
 echo "Testing connectivity to gateway..."
-ping -c 4 192.168.17.65
+ping -c 4 192.168.7.193
 echo ""
 echo "Testing connectivity to Internet..."
 ping -c 4 8.8.8.8

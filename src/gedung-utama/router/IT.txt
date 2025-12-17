@@ -12,13 +12,13 @@ hostname Router-IT
 ! Interface ke Router Gedung Utama
 interface FastEthernet0/0
  description Connection to Router-Gedung-Utama
- ip address 192.168.6.18 255.255.255.252
+ ip address 192.168.5.2 255.255.255.252
  no shutdown
 
 ! Interface ke Switch IT (Servers)
 interface FastEthernet1/0
  description Connection to Switch-IT
- ip address 192.168.5.33 255.255.255.240
+ ip address 192.168.4.225 255.255.255.240
  no shutdown
 
 !============================================
@@ -27,8 +27,8 @@ interface FastEthernet1/0
 
 router ospf 1
  router-id 2.2.2.50
- network 192.168.6.16 0.0.0.3 area 1
- network 192.168.5.32 0.0.0.15 area 1
+ network 192.168.5.0 0.0.0.3 area 1
+ network 192.168.4.224 0.0.0.15 area 1
  passive-interface FastEthernet1/0
  area 1 stub
 
@@ -38,9 +38,9 @@ router ospf 1
 !============================================
 
 ! Note: IP statis untuk servers:
-! 192.168.5.34 - Server 1
-! 192.168.5.35 - Server 2
-! 192.168.5.36 - Server 3
+! 192.168.4.226 - Server 1
+! 192.168.4.227 - Server 2
+! 192.168.4.228 - Server 3
 ! dst...
 
 !============================================
